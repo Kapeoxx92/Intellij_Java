@@ -1,0 +1,225 @@
+Zadanie (0.10 pkt)
+
+System kryptograficzny analizuje liczby całkowite pod kątem struktury ich cyfr. Napisz program, który wczyta liczbę całkowitą N i wypisze sześć statystyk jej cyfr.
+
+Jeśli N jest ujemne, pracuj na wartości bezwzględnej |N|. Specjalny przypadek: dla N = 0 jest dokładnie jedna cyfra: 0.
+
+Wymagane informacje (każda na osobnej linii):
+
+Cyfry: <liczba cyfr>
+Suma: <suma cyfr>
+Iloczyn: <iloczyn cyfr, 0 jeśli dowolna cyfra to 0>
+Maks: <największa cyfra>
+Parzyste: <ile cyfr parzystych (włącznie z 0)>
+Nieparzyste: <ile cyfr nieparzystych>
+
+Pułapka: 0 jest cyfrą parzystą! Liczba 100 ma 3 cyfry: 1, 0, 0 — dwie parzyste.
+
+Wskazówka implementacyjna: Użyj pętli while (tmp > 0) z ekstrakcją cyfry przez tmp % 10 i przesuwaniem tmp /= 10. Do przechowania wartości bezwzględnej potencjalnie dużego N użyj long.
+
+Format wejścia:
+
+linia 1: N (long, Long.MIN_VALUE < N <= Long.MAX_VALUE)
+
+
+Zadanie (0.10 pkt)
+
+Napisz kalkulator równań kwadratowych postaci ax² + bx + c = 0. Program wczyta współczynniki a, b, c (liczby całkowite, a ≠ 0) i wypisze pełną analizę równania.
+
+Wymagane informacje (w tej kolejności):
+
+linia 1: Delta: <Δ = b²-4ac jako long>
+linia 2: Wierzcholek: (<x_v>, <y_v>) — sformatowane do 2 miejsc dziesiętnych
+linia 3+: jeśli Δ < 0 → BRAK ROZWIAZANIA
+          jeśli Δ = 0 → x = <root> (2 d.p.)
+          jeśli Δ > 0 → x1 = <większy root> (2 d.p.), x2 = <mniejszy root> (2 d.p.)
+
+Wzory: wierzchołek x_v = -b / (2a), y_v = -Δ / (4a). Miejsca zerowe: x = (-b ± √Δ) / (2a).
+
+Oblicz Δ = (long)b*b - 4L*a*c używając long — dla dużych współczynników wynik może przekraczać zakres int. Wierzchołek wyznaczaj na double.
+
+Format wejścia:
+
+linia 1: a (int, a ≠ 0)
+linia 2: b (int)
+linia 3: c (int)
+
+
+Zadanie (0.10 pkt)
+
+Napisz kalkulator podatku dochodowego PIT według progów obowiązujących w Polsce w 2024 roku. Program wczyta roczny dochód brutto (jako long) i wypisze trzy wartości.
+
+Progi podatkowe:
+
+dochód ≤ 30 000 PLN          → podatek = 0
+30 000 < dochód ≤ 120 000   → podatek = 0.12 * dochód − 3600
+dochód > 120 000            → podatek = 10 800 + 0.32 * (dochód − 120 000)
+
+Wypisz (każda wartość na osobnej linii, 2 miejsca dziesiętne):
+
+Podatek: <X> PLN
+Zaliczka miesięczna: <X/12> PLN
+Dochód netto: <dochód − podatek> PLN
+
+Uwaga na widening: przechowuj dochód jako long, ale obliczenia podatkowe wykonaj na double (rzutowanie jawne lub automatyczne). Drugi próg zaczyna się ściśle powyżej 30 000 — granica jest wyłączona z przodu: dochód > 30000.
+
+Format wejścia:
+
+linia 1: roczny dochód brutto w PLN (long, 0 ≤ dochód ≤ 10 000 000)
+
+
+Zadanie (0.10 pkt)
+
+Napisz konwerter systemu liczbowego. Program wczyta liczbę całkowitą N (typ long) i bazę B (2–16), a następnie wypisze N zapisane w systemie o podstawie B.
+
+Reguły:
+
+• Cyfry 10–15 zapisuj jako wielkie litery: A, B, C, D, E, F
+• Liczby ujemne: poprzedź wynik znakiem '-' (pracuj na |N|)
+• Dla N = 0 wypisz "0" (niezależnie od bazy)
+
+Wskazówka implementacyjna: Obliczenia algorytmu dzielenia z resztą (N % B, N / B) produkują cyfry od najmniej znaczącej. Aby wypisać od najwyższej, najpierw policz całkowitą liczbę cyfr (int digits w pętli while (tmp > 0)), a następnie dla każdej pozycji od lewej wyznacz odpowiedni dzielnik B^i i wyodrębnij cyfrę. Do obliczania potęg użyj pomocniczej pętli for.
+
+Użyj long dla N oraz pomocniczej zmiennej dzielnika — dla dużych N i małych B (np. B=2) dzielnik szybko rośnie do wielu miliardów.
+
+Format wejścia:
+
+linia 1: N (long)
+linia 2: B (int, 2 ≤ B ≤ 16)
+
+
+Zadanie (0.10 pkt)
+
+Napisz program wyznaczający liczby pierwsze w zadanym przedziale zamkniętym [A, B]. Liczba pierwsza to liczba naturalna > 1, podzielna wyłącznie przez 1 i przez siebie samą.
+
+Wypisz (w tej kolejności):
+
+Liczba pierwszych: <K>
+Suma: <S>
+Maks: <największa pierwsza w [A,B]> lub BRAK jeśli K=0
+<każda liczba pierwsza na osobnej linii, w kolejności rosnącej>
+
+Wskazówka implementacyjna: Sprawdzanie pierwszości liczby n: pętla od i = 2 do i * i <= n. Jeśli dla żadnego i nie zachodzi n % i == 0, liczba jest pierwsza. Użyj boolean i break przy znalezieniu dzielnika.
+
+Pułapka: 1 nie jest liczbą pierwszą! Sprawdź warunek n >= 2 przed pętlą sprawdzającą dzielniki.
+
+Format wejścia:
+
+linia 1: A (int, 1 ≤ A ≤ B ≤ 10 000)
+linia 2: B
+
+
+Zadanie (0.10 pkt)
+
+Ciąg Collatza (hipoteza Collatza) to jedna z nierozwiązanych zagadek matematyki. Startując od dowolnej liczby naturalnej N, stosuj regułę: jeśli parzysta → podziel przez 2; jeśli nieparzysta → pomnóż przez 3 i dodaj 1. Hipoteza głosi, że zawsze dotrzesz do 1 — choć nikt tego nie udowodnił dla wszystkich N.
+
+Napisz program, który:
+
+1. Buduje ciąg Collatza od N do 1 (obie wartości włączone)
+2. Zlicza oddzielnie kroki parzyste (n → n/2) i nieparzyste (n → 3n+1)
+
+Wypisz (każda wartość na osobnej linii):
+
+Dlugosc: <liczba elementów ciągu włącznie z N i 1>
+Maks: <maksymalna wartość w ciągu>
+Kroki parzyste: <liczba kroków n/2>
+Kroki nieparzyste: <liczba kroków 3n+1>
+
+Uwaga: dla dużych N wartości pośrednie mogą przekraczać zakres int (np. N=871 osiąga 190 996). Używaj long dla N i wszystkich zmiennych ciągu. Warunek pętli: while (n != 1) z operatorem modulo n % 2 do rozróżniania parzystości.
+
+Format wejścia:
+
+linia 1: N (long, 1 ≤ N ≤ 10 000 000)
+
+
+Zadanie (0.10 pkt)
+
+Procesory wykonują operacje bezpośrednio na bitach rejestrów. Napisz symulator 32-bitowego rejestru całkowitoliczbowego ze znakiem, który wczyta wartość początkową i ciąg operacji, a po każdej operacji wypisze aktualną zawartość rejestru (jako dziesiętna liczba całkowita ze znakiem).
+
+Obsługiwane operacje:
+
+L n   — przesuń bitowo w lewo o n pozycji      (v << n)
+R n   — przesuń arytmetycznie w prawo o n      (v >> n, zachowuje znak)
+U n   — przesuń logicznie w prawo o n          (v >>> n, wstawia 0)
+A n   — bitowe AND z liczbą n                  (v & n)
+O n   — bitowe OR z liczbą n                   (v | n)
+X n   — bitowe XOR z liczbą n                  (v ^ n)
+N     — bitowe NOT (dopełnienie jedynkowe)     (~v)
+KONIEC — koniec wejścia
+
+Po każdej operacji wypisz aktualną wartość rejestru na osobnej linii.
+
+Kluczowa różnica R vs U: dla liczb ujemnych dają zupełnie różne wyniki. Np. dla v = -1: v >> 1 = -1 (bit znaku replikowany), ale v >>> 1 = 2147483647 (wstawione 0). Odczytuj operacje przez sc.next(), parametr przez sc.nextInt() tylko dla operacji z parametrem.
+
+Format wejścia:
+
+linia 1: wartość początkowa rejestru (int)
+kolejne linie: operacja i opcjonalny parametr (int)
+ostatnia linia: KONIEC
+
+
+Zadanie (0.10 pkt)
+
+Ciąg Fibonacciego rośnie wykładniczo — po 46 wyrazach przekracza zakres int (2 147 483 647) i wymaga long. Napisz program, który generuje N pierwszych wyrazów ciągu Fibonacciego i dla każdego oznacza, czy mieści się w int (INT) czy wymaga long (LONG).
+
+Definicja: F(1) = 1, F(2) = 1, F(k) = F(k-1) + F(k-2).
+
+Format każdej linii wyjścia:
+
+F(k) = <wartość> <INT lub LONG>
+
+Gdzie INT oznacza: wartość ≤ Integer.MAX_VALUE = 2 147 483 647.
+
+Wszystkie obliczenia prowadź na typie long — inaczej suma F(k-1) + F(k-2) przepełni się cicho przed porównaniem. Dopiero przy wypisywaniu sprawdzasz, czy wartość mieści się w int: val <= Integer.MAX_VALUE.
+
+Zmiana ze znacznika INT na LONG następuje między F(46) a F(47): F(46) = 1 836 311 903 (INT), F(47) = 2 971 215 073 (LONG).
+
+Format wejścia:
+
+linia 1: N (int, 1 ≤ N ≤ 86)
+
+
+Zadanie (0.10 pkt)
+
+System telemetrii satelitarnej odbiera strumień odczytów z 10-bitowego przetwornika A/C (zakres 0–1023). Odczyty zakończone są wartością −1 (sentinel). Napisz program analizujący strumień i wypisujący statystyki.
+
+Klasyfikacja każdego odebranego odczytu (poza −1):
+
+wartość < 0          → błąd sensora (Bledy)
+wartość > 1023       → przepełnienie ADC (Przepelnienia)
+0 ≤ wartość ≤ 1023  → poprawny odczyt (Poprawne)
+
+Dla poprawnych odczytów oblicz:
+
+OR  — bitowe OR wszystkich poprawnych wartości
+AND — bitowe AND wszystkich poprawnych wartości (0 jeśli brak poprawnych)
+Srednia — średnia arytmetyczna (2 miejsca dziesiętne; 0.00 jeśli brak)
+
+
+Zadanie (0.10 pkt)
+
+Klasyczny FizzBuzz to specjalny przypadek ogólniejszego wzorca. Napisz program, który dla N liczb od 1 do N stosuje trzy niezależne reguły zastępowania — każdą definiowaną przez inny dzielnik.
+
+Wejście: N, następnie trzy liczby D1, D2, D3 (dzielniki, każdy > 0). Dla każdej liczby i od 1 do N:
+
+• jeśli i podzielne przez D1 → dołącz literę 'A'
+• jeśli i podzielne przez D2 → dołącz literę 'B'
+• jeśli i podzielne przez D3 → dołącz literę 'C'
+• litery łącz w kolejności A, B, C (np. 'AB', 'AC', 'ABC')
+• jeśli żadna reguła nie pasuje → wypisz samą liczbę i
+
+Po wypisaniu ciągu od 1 do N wypisz statystyki (każda na osobnej linii):
+
+A: <liczba i z tylko regułą A>
+B: <liczba i z tylko regułą B>
+C: <liczba i z tylko regułą C>
+AB: ... AC: ... BC: ... ABC: ... Brak: ...
+
+Zastosuj maskę bitową do śledzenia, które reguły pasują do i: int mask = (i%D1==0?1:0) | (i%D2==0?2:0) | (i%D3==0?4:0). Następnie użyj switch(mask) do zliczania kategorii. Uwaga: reguły mogą się pokrywać — np. 6 może być jednocześnie A i B.
+
+Format wejścia:
+
+linia 1: N (int, 1 ≤ N ≤ 10 000)
+linia 2: D1 (int, 1 ≤ D1 ≤ N)
+linia 3: D2 (int, 1 ≤ D2 ≤ N)
+linia 4: D3 (int, 1 ≤ D3 ≤ N)

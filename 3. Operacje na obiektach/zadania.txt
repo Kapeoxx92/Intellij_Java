@@ -1,0 +1,194 @@
+Zadanie (0.10 pkt)
+
+Wczytaj tablicę N liczb całkowitych i wypisz jej elementy w odwrotnej kolejności.
+
+Koncepty: deklaracja tablicy, alokacja operatorem new, pole arr.length, iteracja od końca pętlą for z indeksem.
+
+Format wejścia:
+
+linia 1: N — liczba elementów (1 ≤ N ≤ 100)
+linia 2: N liczb całkowitych oddzielonych spacją (-1000 ≤ ai ≤ 1000)
+
+Format wyjścia:
+
+N liczb oddzielonych spacją — od ostatniej do pierwszej
+
+
+Zadanie (0.10 pkt)
+
+Wczytaj jedno słowo i sprawdź, czy jest palindromem — czytanym tak samo od przodu i od tyłu. Wypisz TAK jeśli jest palindromem, NIE w przeciwnym razie.
+
+Koncepty: metoda charAt(int index), pole length() klasy String, porównywanie znaków char, semantyka niemutowalności String.
+
+Format wejścia:
+
+linia 1: jedno słowo złożone z małych liter i/lub cyfr (1 ≤ długość ≤ 100)
+
+Format wyjścia:
+
+TAK lub NIE
+Część mojego niedokończonego kodu:
+mport java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Boolean polindrome = false;
+        String word = sc.next();
+        String reversed = new StringBuilder(word).reverse().toString();
+
+
+        if (word.equals(reversed)) {
+            System.out.println("TAK");
+        }
+        else {
+            System.out.println("NIE");
+        }
+    }
+}
+
+
+Zadanie (0.10 pkt)
+
+Wczytaj tablicę N liczb całkowitych i oblicz pięć statystyk: sumę, minimum, maksimum oraz liczbę elementów parzystych i nieparzystych.
+
+Koncepty: pętla for-each, min/max inicjalizowany pierwszym elementem, zliczanie warunkowe, operator % dla liczb ujemnych.
+
+Format wejścia:
+
+linia 1: N — liczba elementów (1 ≤ N ≤ 1000)
+linia 2: N liczb całkowitych oddzielonych spacją (-10000 ≤ ai ≤ 10000)
+
+Format wyjścia:
+
+Suma: X
+Min: X
+Max: X
+Parzyste: X
+Nieparzyste: X
+
+
+Zadanie (0.10 pkt)
+
+Zaszyfruj wiadomość szyfrem Cezara: przesuń każdą małą literę alfabetu o N pozycji do przodu (z zawinięciem: po 'z' idzie 'a'). Znaki niebędące małymi literami pozostaw bez zmian.
+
+Koncepty: charAt(), arytmetyka na typie char, operator % przy zawijaniu, StringBuilder do budowania wyniku.
+
+Format wejścia:
+
+linia 1: tekst do zaszyfrowania (tylko małe litery, 1 ≤ długość ≤ 200)
+linia 2: N — przesunięcie (0 ≤ N ≤ 25)
+
+Format wyjścia:
+
+zaszyfrowany tekst (jedna linia)
+
+
+Zadanie (0.10 pkt)
+
+Wczytaj macierz M×N liczb całkowitych, a następnie oblicz sumę każdego wiersza i każdej kolumny.
+
+Koncepty: tablice dwuwymiarowe (int[][]), pole matrix.length i matrix[i].length, zagnieżdżone pętle, model 'tablica tablic'.
+
+Format wejścia:
+
+linia 1: M N — liczba wierszy i kolumn (1 ≤ M,N ≤ 20)
+kolejne M linii: N liczb całkowitych oddzielonych spacją (-100 ≤ ai,j ≤ 100)
+
+Format wyjścia:
+
+Wiersz 1: X
+Wiersz 2: X
+...
+Kolumna 1: X
+Kolumna 2: X
+...
+
+
+Zadanie (0.10 pkt)
+
+System monitorowania logów musi zliczać wystąpienia wzorca w tekście. Wczytaj tekst i wzorzec, a następnie wypisz: ile razy wzorzec występuje w tekście, indeks pierwszego i ostatniego wystąpienia.
+
+Koncepty: indexOf(String str, int fromIndex), lastIndexOf(), pętla wyszukiwania wzorca, zwracana wartość -1 gdy nie znaleziono.
+
+Format wejścia:
+
+linia 1: tekst (tylko małe litery i cyfry, 1 ≤ długość ≤ 500)
+linia 2: wzorzec (1 ≤ długość ≤ 20)
+
+Format wyjścia:
+
+Liczba: X
+Pierwsze: X
+Ostatnie: X
+
+
+Zadanie (0.10 pkt)
+
+Wczytaj zdanie złożone z słów oddzielonych pojedynczą spacją. Wypisz to samo zdanie, ale z każdym słowem odwróconym. Kolejność słów pozostaje niezmieniona.
+
+Koncepty: String.split(), new StringBuilder(slowo).reverse().toString(), łączenie wyników przy użyciu StringBuilder (nie operator + w pętli!).
+
+Format wejścia:
+
+linia 1: zdanie (litery, cyfry i spacje, 1 ≤ liczba słów ≤ 50)
+
+Format wyjścia:
+
+zdanie z każdym słowem odwróconym, słowa oddzielone pojedynczą spacją
+
+
+Zadanie (0.10 pkt)
+
+Wygeneruj pierwsze N wierszy trójkąta Pascala. Trójkąt Pascala to klasyczny przykład struktury naturalnie reprezentowanej przez tablicę postrzępioną: wiersz o numerze i (licząc od 0) ma i+1 elementów, z których pierwszy i ostatni wynoszą 1, a każdy pozostały jest sumą dwóch sąsiadów z wiersza wyżej.
+
+Koncepty: tablica postrzępiona (int[][] pascal = new int[n][]), alokacja wierszy o różnych długościach, zagnieżdżone pętle, pascal[i][j] = pascal[i-1][j-1] + pascal[i-1][j].
+
+Format wejścia:
+
+linia 1: N — liczba wierszy (1 ≤ N ≤ 15)
+
+Format wyjścia:
+
+N wierszy; elementy w wierszu oddzielone spacją
+
+
+Zadanie (0.10 pkt)
+
+System bezpieczeństwa analizuje tekst wejściowy pod kątem składu znaków. Wczytaj jeden wiersz tekstu i policz cztery kategorie znaków: cyfry (0-9), wielkie litery (A-Z), małe litery (a-z) oraz wszystkie pozostałe (znaki specjalne, spacje itp.).
+
+Koncepty: iteracja przez String za pomocą charAt() i length(), metody klasy Character: Character.isDigit(), Character.isUpperCase(), Character.isLowerCase().
+
+Format wejścia:
+
+linia 1: dowolny tekst (0 ≤ długość ≤ 500)
+
+Format wyjścia:
+
+Cyfry: X
+Wielkie: X
+Male: X
+Inne: X
+
+
+Zadanie (0.10 pkt)
+
+System oceniania studentów musi przetworzyć N rekordów w formacie imie:wynik i wygenerować raport. Wyniki to liczby całkowite 0–100. Student zdał jeśli wynik ≥ 50.
+
+Koncepty: String.split(":"), Integer.parseInt(), String[] i int[] jako równoległe tablice, Arrays.sort() na kopii tablicy imion, StringBuilder do budowania raportu, String.format("%.2f", avg).
+
+Format wejścia:
+
+linia 1: N — liczba studentów (1 ≤ N ≤ 50)
+kolejne N linii: imie:wynik (imię bez spacji, wynik 0–100)
+
+Format wyjścia:
+
+Posortowane: imie1 imie2 ... (imiona posortowane leksykograficznie, oddzielone spacją)
+Najwyzszy: X
+Najnizszy: X
+Srednia: X.XX
+Zdani: X
+Oblani: X
+Raport: imie1(wynik1) imie2(wynik2) ... (w oryginalnej kolejności)

@@ -1,0 +1,289 @@
+Zadanie (0.10 pkt)
+
+System kontroli lotów wyświetla aktualny czas w formacie 24-godzinnym wraz
+    z klasyfikacją pory dnia. Napisz program, który wczytuje godzinę (0–23) i
+    minuty (0–59) jako dwie osobne liczby całkowite, a następnie wypisuje:
+
+    czas w formacie HH:MM (z wiodącymi zerami),
+    porę dnia według schematu:
+        morning — godziny 6:00–11:59
+        afternoon — godziny 12:00–17:59
+        evening — godziny 18:00–21:59
+        night
+                  — godziny 22:00–23:59 oraz 0:00–5:59
+
+Wskazówka:
+    Do formatowania z wiodącymi zerami użyj System.out.printf("%02d:%02d%n", h, m) lub String.format.
+
+Format wejścia:
+
+godzina
+minuty
+
+Format wyjścia:
+
+HH:MM
+pora_dnia
+
+
+Zadanie (0.10 pkt)
+
+System magazynowy generuje etykiety dla paczek. Napisz program, który
+    wczytuje:
+
+    wagę paczki w gramach (liczba całkowita),
+    flagę kruchości: 1 — paczka krucha, 0 — paczka zwykła.
+
+Program wypisuje trzy informacje (lub dwie, jeśli paczka nie jest
+    krucha):
+
+    wagę w formacie X kg Y g (bez wiodących zer),
+    kategorię wagową:
+        standard — do 5000 g włącznie,
+        heavy
+                  — od 5001 g do 20000 g włącznie,
+        oversized — powyżej 20000 g.
+    FRAGILE
+          — tylko jeśli paczka jest krucha.
+
+Format wejścia:
+
+waga_w_gramach
+flaga_kruchosci
+
+Format wyjścia:
+
+X kg Y g
+kategoria
+[FRAGILE]
+
+
+Zadanie (0.10 pkt)
+
+Terminal bankowy maskuje numer PIN wyświetlany na ekranie — każda cyfra
+    zastępowana jest gwiazdką, ale na końcu pokazywana jest suma cyfr
+    PIN-u (kontrola poprawności wpisania).
+
+Napisz program, który wczytuje czterocyfrowy PIN jako liczbę całkowitą
+    (może mieć wiodące zera — wczytaj jako String), a następnie wypisuje:
+
+    zamaskowany PIN: cztery gwiazdki ****,
+    sumę cyfr w formacie Digit sum: X,
+    ocenę siły PINu:
+        weak
+                  — wszystkie cyfry identyczne (np. 1111, 0000),
+        medium
+                  — suma cyfr mniejsza niż 10,
+        strong
+                  — suma cyfr od 10 do 24 włącznie,
+        very strong
+                  — suma cyfr powyżej 24 (maksymalnie 36 dla 9999).
+
+Uwaga: ocena weak
+    ma najwyższy priorytet — jeśli wszystkie cyfry są identyczne, wypisz weak niezależnie od sumy.
+
+Format wejścia:
+
+PIN (4 znaki, np. 0042)
+
+Format wyjścia:
+
+****
+Digit sum: X
+oceana_sily
+
+
+Zadanie (0.20 pkt)
+
+Stacja metronomu generuje sekwencję uderzeń. Każde uderzenie ma swój numer
+    (od 1 do n). Napisz program, który wczytuje liczbę uderzeń n oraz dwie liczby całkowite a i b
+    (gdzie 2 ≤ a < b ≤ n), a następnie dla każdego uderzenia od 1 do n
+    wypisuje:
+
+    TICK-TOCK
+          — jeśli numer uderzenia jest podzielny zarówno przez a, jak i przez b,
+    TICK
+          — jeśli numer uderzenia jest podzielny tylko przez a,
+    TOCK
+          — jeśli numer uderzenia jest podzielny tylko przez b,
+    numer uderzenia — w pozostałych przypadkach.
+
+Format wejścia:
+
+n
+a
+b
+
+Format wyjścia:
+
+(jedna linia na uderzenie)
+
+
+Zadanie (0.20 pkt)
+
+Czujnik temperatury zapisuje odczyty przez cały dzień. Napisz program,
+    który wczytuje liczbę odczytów n, a następnie n
+    liczb całkowitych (temperatury w °C), po czym wypisuje raport dzienny:
+
+    Min: X — najniższy odczyt,
+    Max: X — najwyższy odczyt,
+    Range: X — różnica Max − Min,
+    Crossings: X — liczbę przekroczeń zera, czyli ile razy kolejny odczyt ma inny znak niż poprzedni (zmiana z
+          dodatniego na ujemny lub odwrotnie; odczyty równe 0 nie są ani dodatnie
+          ani ujemne — nie liczą się jako przekroczenie).
+
+Format wejścia:
+
+n
+t1 t2 t3 ... tn
+
+Format wyjścia:
+
+Min: X
+Max: X
+Range: X
+Crossings: X
+
+
+Zadanie (0.20 pkt)
+
+Matematycy badają hipotezę Collatza
+    — każda liczba naturalna po wielokrotnym zastosowaniu reguły:
+
+    jeśli liczba jest parzysta — podziel ją przez 2,
+    jeśli liczba jest nieparzysta — pomnóż przez 3 i dodaj 1,
+
+ostatecznie osiąga wartość 1. Wczytaj t
+    liczb naturalnych (1 ≤ n ≤ 1 000 000). Dla każdej z nich wypisz dwie
+    wartości:
+
+    Steps: X
+          — liczba kroków potrzebnych do osiągnięcia 1 (dla n=1 wynosi 0),
+    Max: X
+          — największa wartość osiągnięta podczas całej sekwencji (włącznie z
+          n).
+
+Wskazówka: użyj typu long, ponieważ wartości pośrednie mogą przekroczyć zakres int.
+
+Format wejścia:
+
+t
+n1
+n2
+...
+
+Format wyjścia:
+
+Steps: X
+Max: X
+(pusta linia między przypadkami)
+
+
+Zadanie (0.20 pkt)
+
+Kryptograf bada właściwości liczb. Liczba narcystyczna
+    (lub liczba Armstronga) to taka liczba naturalna, której suma sześcianów
+    cyfr równa się samej tej liczbie (np. 153 = 1³ + 5³ + 3³ = 1 + 125 + 27 =
+    153).
+
+Napisz program, który wczytuje dwie liczby całkowite lo i hi
+    (1 ≤ lo ≤ hi ≤ 9999), a następnie wypisuje wszystkie liczby narcystyczne w
+    tym zakresie (włącznie), każdą w osobnej linii. Jeśli w zakresie nie ma
+    żadnej takiej liczby, wypisz none.
+
+Wskazówka:
+    dla liczb 1–9999 wystarczy sprawdzać sumę sześcianów cyfr. Liczby
+    narcystyczne w tym zakresie to: 1, 153, 370, 371,
+    407.
+
+Format wejścia:
+
+lo
+hi
+
+Format wyjścia:
+
+(jedna liczba na linię lub "none")
+
+
+Zadanie (0.30 pkt)
+
+Analityk danych bada sekwencję liczb pod kątem palindromów liczbowych
+    — liczb, które czytane od lewej i od prawej dają ten sam ciąg cyfr (np. 121,
+    9009, 1). Uwaga: wiodące zera nie są brane pod uwagę (np. odwrócenienie 100
+    to 1, więc 100 nie jest palindromem).
+
+Napisz program, który wczytuje liczbę przypadków t, a następnie dla każdego przypadku wczytuje jedną dodatnią liczbę
+    całkowitą n (1 ≤ n ≤ 109) i wypisuje w osobnej linii:
+
+    YES X — jeśli n jest palindromem, gdzie X to liczba cyfr,
+    NO X S — jeśli n nie jest palindromem, gdzie X to liczba cyfr, a S to suma cyfr.
+
+Ważne:
+    sprawdzenie palindromu wykonaj przez odwrócenie liczby arytmetycznie
+    (bez konwersji na String — użyj tylko operatorów / i %).
+
+Format wejścia:
+
+t
+n1
+n2
+...
+
+Format wyjścia:
+
+(jedna linia na przypadek)
+
+
+Zadanie (0.30 pkt)
+
+System kryptograficzny potrzebuje szybkiej listy liczb pierwszych.
+    Zaimplementuj Sito Eratostenesa i użyj go do odpowiedzi na q zapytań.
+
+Wczytaj liczbę n
+    (2 ≤ n ≤ 100 000) — górną granicę sita — a następnie liczbę zapytań q i q
+    liczb całkowitych. Dla każdego zapytania x wypisz w osobnej linii:
+
+    PRIME — jeśli x jest liczbą pierwszą,
+    COMPOSITE pf — jeśli x jest złożona, gdzie pf to jej najmniejszy czynnik pierwszy,
+    OUT OF RANGE — jeśli x
+          jest poza zakresem sita (tzn. x < 2 lub x > n).
+
+Format wejścia:
+
+n
+q
+x1
+x2
+...
+
+
+Zadanie (0.40 pkt)
+
+System telemetryczny satelity przesyła dane w różnych systemach liczbowych.
+    Napisz program, który wczytuje t
+    poleceń konwersji. Każde polecenie zawiera trzy wartości:
+
+    liczbę value
+          zapisaną w systemie o podstawie fromBase,
+    docelową podstawę toBase.
+
+Dla każdego polecenia wypisz value przekonwertowane do systemu toBase. Cyfry powyżej 9 zapisuj wielkimi literami: A=10, B=11, ..., F=15.
+
+Ograniczenia:
+
+    2 ≤ fromBase, toBase ≤ 16,
+    value jest poprawną liczbą nieujemną w systemie fromBase (0 ≤ value <
+          231 po konwersji na dziesiętny),
+    value może zawierać wielkie litery A–F.
+
+Format wejścia:
+
+t
+value1 fromBase1 toBase1
+value2 fromBase2 toBase2
+...
+
+Format wyjścia:
+
+(jedna linia na konwersję)
