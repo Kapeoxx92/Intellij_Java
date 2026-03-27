@@ -1,0 +1,20 @@
+Zadanie (0.10 pkt)
+
+Stwórz klasę Song, która modeluje pojedynczą piosenkę.
+
+Klasa powinna posiadać trzy prywatne pola:
+
+    title (String) — tytuł piosenki
+    artist (String) — wykonawca
+    durationSeconds (int) — czas trwania w sekundach
+
+Klasa powinna posiadać:
+
+    Konstruktor przyjmujący trzy argumenty: title, artist, durationSeconds
+    Metody dostępowe: getTitle(), getArtist(), getDurationSeconds()
+    Metodę getFormattedDuration() zwracającą czas w formacie MM:SS (minuty i sekundy, sekundy zawsze dwucyfrowe)
+    Metodę toString() zwracającą: "[title]" by [artist] ([MM:SS])
+
+Format wejścia: trzy linie — tytuł, artysta, czas w sekundach.
+
+Format wyjścia: wynik metody toString().
