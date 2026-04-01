@@ -18,3 +18,276 @@ Klasa powinna posiadać:
 Format wejścia: trzy linie — tytuł, artysta, czas w sekundach.
 
 Format wyjścia: wynik metody toString().
+``
+
+Zadanie (0.10 pkt)
+
+Stwórz klasę Athlete, która modeluje sportowca.
+
+Klasa powinna posiadać trzy prywatne pola:
+
+    name (String) — imię i nazwisko
+    age (int) — wiek (musi być w przedziale [0, 120])
+    personalBestSeconds (double) — rekord życiowy w sekundach (musi być > 0)
+
+Klasa powinna posiadać:
+
+    Konstruktor przyjmujący trzy argumenty (name, age, personalBestSeconds)
+    Metody dostępowe: getName(), getAge(), getPersonalBestSeconds()
+    Setter setAge(int age) — zmienia wiek tylko jeśli wartość mieści się w [0, 120]; w przeciwnym razie nic nie robi
+    Setter setPersonalBestSeconds(double pb) — aktualizuje rekord tylko jeśli pb > 0; w przeciwnym razie nic nie robi
+    Metodę toString() zwracającą: Athlete[name=[name], age=[age], pb=[personalBestSeconds]]
+
+Format wejścia: pierwsza linia to komenda inicjalizująca INIT name age pb, kolejne linie to komendy:
+
+    SET_AGE value — wywołaj setAge(value)
+    SET_PB value — wywołaj setPersonalBestSeconds(value)
+    PRINT — wypisz wynik toString()
+
+Komenda                 Co robi                     Wywołanie Java
+
+INIT Anna Nowak 25      tworzy obiekt Athlete       a = new Athlete("Anna Nowak", 25, 58.5)
+
+58.5
+
+
+SET_AGE 26              ustawia nowy wiek           a.setAge(26)
+
+
+SET_PB 57.0             ustawia nowy rekord         a.setPersonalBestSeconds(57.0)
+
+
+PRINT                   wypisuje opis               System.out.println(a.toString())
+
+
+
+
+Zadanie (0.10 pkt)
+
+Stwórz klasę Planet, która modeluje planetę układu słonecznego.
+
+Klasa powinna posiadać trzy prywatne pola:
+
+    name (String) — nazwa planety
+    diameterKm (double) — średnica w kilometrach
+    hasRings (boolean) — czy posiada pierścienie
+
+Klasa powinna posiadać trzy przeciążone konstruktory, powiązane łańcuchowaniem przez this(...):
+
+    Planet(String name, double diameterKm, boolean hasRings) — konstruktor główny (kanoniczy)
+    Planet(String name, double diameterKm) — zakłada hasRings = false, deleguje do głównego
+    Planet(String name) — zakłada diameterKm = 0.0 i hasRings = false, deleguje do konstruktora dwuargumentowego
+
+Dodaj metodę toString() zwracającą: Planet[name=[name], diameter=[diameterKm], rings=[hasRings]]
+
+Format wejścia: jedna linia z komendą:
+
+    P3 [name] [diameterKm] [hasRings] — użyj konstruktora 3-argum.
+    P2 [name] [diameterKm] — użyj konstruktora 2-argum.
+    P1 [name] — użyj konstruktora 1-argum.
+
+Komenda                     Co robi                         Wywołanie Java
+
+
+P3 Saturn 116460.0 true     tworzy Planet (3 argumenty)     p = new Planet("Saturn", 116460.0, true)
+
+
+P2 Earth 12742.0            tworzy Planet (2 argumenty)     p = new Planet("Earth", 12742.0)
+
+
+P1 Nibiru                   tworzy Planet (1 argument)      p = new Planet("Nibiru")
+
+
+Format wyjścia: wynik toString().
+
+
+
+Zadanie (0.10 pkt)
+
+Stwórz klasę Workout, która modeluje trening sportowy.
+
+Klasa powinna posiadać prywatne pola:
+
+    name (String) — nazwa treningu
+    caloriesBurned (double) — spalone kalorie, domyślnie 0.0
+
+Konstruktor: Workout(String name) — inicjalizuje nazwę, caloriesBurned = 0.0.
+
+Dodaj trzy przeciążone wersje metody addCalories:
+
+    addCalories(double amount) — dodaje podaną liczbę kalorii (jeśli amount > 0)
+    addCalories(int amount) — konwertuje na double i dodaje (jeśli amount > 0)
+    addCalories(double amount, int repetitions) — dodaje amount * repetitions (jeśli oba > 0)
+
+Dodaj metodę getCaloriesBurned() i toString() zwracającą: Workout[name=[name], calories=[caloriesBurned]]
+
+Format wejścia: pierwsza linia to nazwa treningu, kolejne linie to komendy:
+
+    ADD_D [double] — wywołaj addCalories(double)
+    ADD_I [int] — wywołaj addCalories(int)
+    ADD_R [double] [int] — wywołaj addCalories(double, int)
+    PRINT — wypisz toString()
+
+Komenda                 Co robi                         Wywołanie Java
+
+
+ADD_D 150.5             dodaje kalorie (double)         w.addCalories(150.5)
+
+
+ADD_I 50                dodaje kalorie (int)            w.addCalories(50)
+
+
+ADD_R 10.0 5            dodaje kalorie × powtórzenia    w.addCalories(10.0, 5)
+
+
+PRINT                   wypisuje opis                   System.out.println(w.toString())
+
+
+
+Zadanie (0.10 pkt)
+
+Stwórz klasę Pet, która modeluje zwierzę domowe i śledzi liczbę wszystkich utworzonych zwierząt.
+
+Klasa powinna posiadać:
+
+    name (String, prywatne) — imię zwierzęcia
+    species (String, prywatne) — gatunek (np. "cat", "dog")
+    count (private static int) — licznik wszystkich utworzonych obiektów, startuje od 0
+
+Konstruktor Pet(String name, String species) powinien inkrementować count przy każdym tworzeniu obiektu.
+
+Dodaj:
+
+    Gettery: getName(), getSpecies()
+    Statyczną metodę getCount() zwracającą aktualną wartość count
+    Metodę toString() zwracającą: Pet[name=[name], species=[species]]
+
+Format wejścia: linie z komendami:
+
+    NEW [name] [species] — utwórz obiekt Pet (zapamiętaj go jako ostatni)
+    PRINT — wypisz toString() ostatnio utworzonego Pet
+    COUNT — wypisz wynik Pet.getCount()
+
+Komenda                 Co robi                         Wywołanie Java
+
+
+NEW Mruczek cat         tworzy obiekt Pet               last = new Pet("Mruczek", "cat")
+
+
+PRINT                   wypisuje opis ostatniego Pet    System.out.println(last.toString())
+
+
+COUNT                   wypisuje licznik obiektów       System.out.println(Pet.getCount())
+
+
+
+Zadanie (0.10 pkt)
+
+Stwórz klasę narzędziową UnitConverter, która zawiera wyłącznie metody statyczne do konwersji jednostek.
+
+Klasa nie powinna dawać się instancjonować — dodaj prywatny konstruktor bezargumentowy.
+
+Zaimplementuj następujące statyczne metody:
+
+    kmToMiles(double km) — konwertuje kilometry na mile: km * 0.621371
+    milesToKm(double miles) — konwertuje mile na kilometry: miles / 0.621371
+    kgToLbs(double kg) — konwertuje kilogramy na funty: kg * 2.20462
+    lbsToKg(double lbs) — konwertuje funty na kilogramy: lbs / 2.20462
+    isValidDistance(double km) — zwraca true jeśli km >= 0, inaczej false
+
+Format wejścia: linie z komendami:
+
+    KM_TO_MI [value] — wypisz wynik kmToMiles(value)
+    MI_TO_KM [value] — wypisz wynik milesToKm(value)
+    KG_TO_LBS [value] — wypisz wynik kgToLbs(value)
+    LBS_TO_KG [value] — wypisz wynik lbsToKg(value)
+    VALID [value] — wypisz wynik isValidDistance(value)
+
+Komenda             Co robi                         Wywołanie Java
+
+
+KM_TO_MI 10.0       konwertuje km na mile           System.out.println(UnitConverter.kmToMiles(10.0))
+
+
+MI_TO_KM 1.0        konwertuje mile na km           System.out.println(UnitConverter.milesToKm(1.0))
+
+
+KG_TO_LBS 70.0      konwertuje kg na funty          System.out.println(UnitConverter.kgToLbs(70.0))
+
+
+LBS_TO_KG 100.0     konwertuje funty na kg          System.out.println(UnitConverter.lbsToKg(100.0))
+
+
+VALID -1.0          sprawdza poprawność dystansu    System.out.println(UnitConverter.isValidDistan
+
+
+
+
+Zadanie (0.10 pkt)
+
+Stwórz klasę Prescription, która modeluje receptę medyczną.
+
+Klasa powinna posiadać prywatne pola:
+
+    medicationName (String) — nazwa leku, niezmienne po utworzeniu (final)
+    dosageMg (double) — dawka w miligramach, niezmienne (final)
+    refillsRemaining (int) — liczba pozostałych uzupełnień, mutowalny
+
+Konstruktor Prescription(String medicationName, double dosageMg, int refillsRemaining) powinien:
+
+    Rzucić IllegalArgumentException jeśli medicationName jest null lub pusty (po trim()), z komunikatem: Invalid medication name
+    Rzucić IllegalArgumentException jeśli dosageMg <= 0, z komunikatem: Dosage must be positive
+    Rzucić IllegalArgumentException jeśli refillsRemaining < 0, z komunikatem: Refills cannot be negative
+
+Dodaj metodę useRefill() — zmniejsza refillsRemaining o 1, rzuca IllegalStateException z komunikatem No refills remaining jeśli już 0.
+
+Dodaj gettery: getMedicationName(), getDosageMg(), getRefillsRemaining().
+
+Metoda toString() zwraca: Prescription[med=[medicationName], dose=[dosageMg]mg, refills=[refillsRemaining]]
+
+Format wejścia: komenda inicjalizująca, potem komendy:
+
+    INIT [name] [dosageMg] [refills] — tworzy obiekt Prescription
+    USE — wywołaj useRefill(), jeśli rzuci wyjątek wypisz jego message
+    PRINT — wypisz toString()
+    INIT_ERR [name] [dosageMg] [refills] — próba tworzenia obiektu; jeśli rzuci wyjątek, wypisz jego message
+
+Komenda             Co robi                 Wywołanie Java
+
+
+INIT Ibuprofen 200.0 3
+
+
+
+
+
+
+
+tworzy obiekt Prescription
+
+
+p = new Prescription("Ibuprofen", 200.0, 3)
+
+USE
+
+
+zużywa jedno uzupełnienie
+
+
+p.useRefill()
+
+PRINT
+
+
+wypisuje opis recepty
+
+
+System.out.println(p.toString())
+
+INIT_ERR Lek -5.0 1
+
+
+próba tworzenia (oczekiwany wyjątek)
+
+
+new Prescription("Lek", -5.0, 1) // rzuca wyjątek
