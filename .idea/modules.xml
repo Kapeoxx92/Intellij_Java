@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/4. Sekcja 4/4. Sekcja 4.iml" filepath="$PROJECT_DIR$/4. Sekcja 4/4. Sekcja 4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Intellij_Java.iml" filepath="$PROJECT_DIR$/.idea/Intellij_Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/korkiJava/korkiJava.iml" filepath="$PROJECT_DIR$/korkiJava/korkiJava.iml" />
+    </modules>
+  </component>
+</project>
