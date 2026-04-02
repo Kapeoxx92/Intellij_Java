@@ -13,6 +13,9 @@ class Athlete {
     }
 
     // TODO: gettery: getName(), getAge(), getPersonalBestSeconds()
+    public String getName() { return name; }
+    public int getAge() { return age; }
+    public double getPersonalBestSeconds() { return  personalBestSeconds; }
 
     // TODO: setAge(int age) — tylko jeśli age w [0, 120]
     public void setAge(int age) {
@@ -21,6 +24,14 @@ class Athlete {
         }
     }
     // TODO: setPersonalBestSeconds(double pb) — tylko jeśli pb > 0
+    public void setPersonalBestSeconds(double pb) {
+        if (pb > 0) {
+            this.personalBestSeconds = pb;
+        }
+    }
 
     // TODO: toString() → Athlete[name=[name], age=[age], pb=[personalBestSeconds]]
+    public String toString() {
+        return "Athlete[name=" + name + ", age=" + age + ", pb=" + personalBestSeconds + "]";
+    }
 }

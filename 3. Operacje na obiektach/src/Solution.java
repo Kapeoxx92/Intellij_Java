@@ -1,9 +1,8 @@
-/* zadanie 1
-
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Solution {
-    public static void main(String[] args) {
+    public static void zadanie1() {
         Scanner sc = new Scanner(System.in);
 
         int length = sc.nextInt();
@@ -20,16 +19,8 @@ public class Solution {
             System.out.println(arr[i]);
         }
     }
-}
- */
 
-/* zadanie 2
-
-
-import java.util.Scanner;
-
-public class Solution {
-    public static void main(String[] args) {
+    public static void zadanie2() {
         Scanner sc = new Scanner(System.in);
 
         Boolean polindrome = false;
@@ -39,19 +30,12 @@ public class Solution {
 
         if (word.equals(reversed)) {
             System.out.println("TAK");
-        }
-        else {
+        } else {
             System.out.println("NIE");
         }
     }
-}
- */
 
-/* zadanie 3
-import java.util.Scanner;
-
-public class Solution {
-    public static void main(String[] args) {
+    public static void zadanie3() {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
         int sum = 0;
@@ -85,14 +69,8 @@ public class Solution {
         System.out.println("Parzyste: " + evenNum);
         System.out.println("Nieparzyste: " + oddNum);
     }
-}
- */
 
-/* zadanie 4
-import java.util.Scanner;
-
-public class Solution {
-    public static void main(String[] args) {
+    public static void zadanie4() {
         Scanner sc = new Scanner(System.in);
 
         String text = sc.nextLine();
@@ -113,14 +91,8 @@ public class Solution {
 
         System.out.println(result.toString());
     }
-}
- */
 
-/* zadanie 5
-import java.util.Scanner;
-
-public class Solution {
-    public static void main(String[] args) {
+    public static void zadanie5() {
         Scanner sc = new Scanner(System.in);
 
         int M = sc.nextInt();
@@ -150,14 +122,8 @@ public class Solution {
             System.out.println("Kolumna " + (j + 1) + ": " + sum);
         }
     }
-}
- */
 
-/* zadanie 6
-import java.util.Scanner;
-
-public class Solution {
-    public static void main(String[] args) {
+    public static void zadanie6() {
         Scanner sc = new Scanner(System.in);
 
         String text = sc.nextLine();
@@ -179,14 +145,8 @@ public class Solution {
         System.out.println("Pierwsze: " + first);
         System.out.println("Ostatnie: " + last);
     }
-}
- */
 
-/* zadanie 7
-import java.util.Scanner;
-
-public class Solution {
-    public static void main(String[] args) {
+    public static void zadanie7() {
         Scanner sc = new Scanner(System.in);
 
         String sentence = sc.nextLine();
@@ -205,14 +165,8 @@ public class Solution {
 
         System.out.println(result.toString());
     }
-}
- */
 
-/* zadanie 8
-import java.util.Scanner;
-
-public class Solution {
-    public static void main(String[] args) {
+    public static void zadanie8() {
         Scanner sc = new Scanner(System.in);
 
         int N = sc.nextInt();
@@ -241,14 +195,8 @@ public class Solution {
             System.out.println();
         }
     }
-}
- */
 
-/* zadanie 9
-import java.util.Scanner;
-
-public class Solution {
-    public static void main(String[] args) {
+    public static void zadanie9() {
         Scanner sc = new Scanner(System.in);
 
         String text = sc.nextLine();
@@ -277,14 +225,8 @@ public class Solution {
         System.out.println("Male: " + lower);
         System.out.println("Inne: " + other);
     }
-}
- */
 
-/* zadanie 10
-import java.util.*;
-
-public class Solution {
-    public static void main(String[] args) {
+    public static void zadanie10() {
         Scanner sc = new Scanner(System.in);
 
         int N = sc.nextInt();
@@ -317,13 +259,10 @@ public class Solution {
             else failed++;
         }
 
-        // sortowanie imion (kopia!)
-        String[] sortedNames = names.clone();
-        Arrays.sort(sortedNames);
-
         // wypisanie posortowanych
         System.out.print("Posortowane: ");
         for (int i = 0; i < N; i++) {
+            boolean[] sortedNames = new boolean[0];
             System.out.print(sortedNames[i]);
             if (i < N - 1) System.out.print(" ");
         }
@@ -355,5 +294,17 @@ public class Solution {
 
         System.out.println(report.toString());
     }
+
+    public static void main(String[] args) {
+        zadanie1();
+        /*zadanie2();
+        zadanie3();
+        zadanie4();
+        zadanie5();
+        zadanie6();
+        zadanie7();
+        zadanie8();
+        zadanie9();
+        zadanie10();*/
+    }
 }
- */
