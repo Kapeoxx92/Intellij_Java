@@ -252,42 +252,213 @@ Format wejścia: komenda inicjalizująca, potem komendy:
     PRINT — wypisz toString()
     INIT_ERR [name] [dosageMg] [refills] — próba tworzenia obiektu; jeśli rzuci wyjątek, wypisz jego message
 
+Komenda                 Co robi                 Wywołanie Java
+
+
+INIT Ibuprofen 200.0    tworzy obiekt           p = new
+3                       Prescription            Prescription("Ibuprofen", 200.0, 3)
+
+
+USE                     zużywa jedno            p.useRefill()
+                        uzupełnienie
+
+PRINT                   wypisuje opis           System.out.println(p.toString())
+                        recepty
+
+INIT_ERR Lek -5.0 1     próba tworzenia         new Prescription("Lek", -5.0, 1) // rzuca wyjątek
+                        (oczekiwany wyjątek)
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Stwórz klasę GameCharacter, która modeluje postać w grze.
+
+Klasa powinna posiadać:
+
+    MAX_HEALTH — stała statyczna public static final int = 100
+    nextId — prywatna statyczna int, startuje od 1
+    id (private final int) — unikalny ID nadawany automatycznie
+    name (private final String) — niezmienne
+    health (private int) — punkty życia, domyślnie MAX_HEALTH
+    level (private int) — poziom, domyślnie 1
+
+Klasa powinna mieć dwa konstruktory powiązane przez this(...):
+
+    GameCharacter(String name, int level) — konstruktor główny; waliduje: name nie może być null/pusty (komunikat: Name required), level musi być >= 1 (komunikat: Level must be >= 1); nadaje unikalny id i ustawia health = MAX_HEALTH
+    GameCharacter(String name) — deleguje do głównego przez this(name, 1)
+
+Dodaj metody:
+
+    takeDamage(int dmg) — zmniejsza health o dmg (min. 0, max. MAX_HEALTH); ignoruje wartości <= 0
+    heal(int amount) — zwiększa health o amount, ale nie przekracza MAX_HEALTH; ignoruje <= 0
+    isAlive() — zwraca health > 0
+    Gettery: getId(), getName(), getHealth(), getLevel()
+    toString(): GameCharacter[id=[id], name=[name], health=[health], level=[level]]
+
+Format wejścia: linie z komendami:
+
+    NEW2 [name] [level] — utwórz przez konstruktor 2-arg, zapamiętaj jako bieżący
+    NEW1 [name] — utwórz przez konstruktor 1-arg, zapamiętaj jako bieżący
+    DMG [value] — wywołaj takeDamage
+    HEAL [value] — wywołaj heal
+    ALIVE — wypisz isAlive()
+    PRINT — wypisz toString()
+    ERR2 [name] [level] — próba tworzenia NEW2; jeśli wyjątek, wypisz message
+
 Komenda             Co robi                 Wywołanie Java
 
 
-INIT Ibuprofen 200.0 3
+NEW2 Hero 5         tworzy postać           current = new GameCharacter("Hero", 5)
+                    (2 argumenty)
+
+NEW1 Warrior        tworzy postać           current = new GameCharacter("Warrior")
+                    (1 argument)
+
+DMG 30              zadaje obrażenia        current.takeDamage(30)
+
+
+HEAL 20             leczy postać            current.heal(20)
+
+
+ALIVE               sprawdza czy żyje       System.out.println(current.isAlive())
+
+
+PRINT               wypisuje opis postaci   System.out.println(current.toString())
+
+
+ERR2 Villain 0      próba tworzenia         new GameCharacter("Villain", 0) // rzuca wyjątek
+                    (oczekiwany wyjątek)
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Stwórz klasę Aquarium, która modeluje akwarium.
+
+Klasa powinna posiadać prywatne pola:
+
+    name (String) — nazwa akwarium
+    capacityLiters (double) — pojemność w litrach
+    fishCount (int) — liczba ryb, startuje od 0
+
+Konstruktor Aquarium(String name, double capacityLiters) powinien:
+
+    Rzucić IllegalArgumentException z komunikatem Capacity must be positive jeśli capacityLiters <= 0
+
+Dodaj metody:
+
+    addFish(int n) — dodaje n ryb; rzuca IllegalArgumentException z komunikatem Count must be positive jeśli n <= 0; rzuca IllegalStateException z komunikatem Aquarium full jeśli po dodaniu przekroczyłoby się max pojemność (1 ryba = 10 litrów)
+    removeFish(int n) — usuwa n ryb; rzuca IllegalArgumentException z komunikatem Count must be positive jeśli n <= 0; rzuca IllegalStateException z komunikatem Not enough fish jeśli nie ma tylu ryb
+    transferTo(Aquarium other, int n) — przenosi n ryb z tego akwarium do other; używa wewnętrznie removeFish i addFish
+    getMaxFish() — zwraca (int)(capacityLiters / 10)
+    Gettery: getName(), getCapacityLiters(), getFishCount()
+    toString(): Aquarium[name=[name], capacity=[capacityLiters]L, fish=[fishCount]/[maxFish]]
+
+Format wejścia: komendy:
+
+    AQUA [id] [name] [capacity] — utwórz akwarium pod danym id (0 lub 1)
+    ADD [id] [n] — addFish; jeśli wyjątek, wypisz message
+    REM [id] [n] — removeFish; jeśli wyjątek, wypisz message
+    TRANS [fromId] [toId] [n] — transferTo; jeśli wyjątek, wypisz message
+    PRINT [id] — wypisz toString() dla danego akwarium
+
+Komenda             Co robi             Wywołanie Java
+
+
+AQUA 0 MainTank     tworzy akwarium     aquariums[0] = new Aquarium("MainTank", 100.0)
+100.0               pod id 0
+
+
+ADD 0 5             dodaje 5 ryb do     aquariums[0].addFish(5)
+                    akwarium 0
+
+REM 0 2             usuwa 2 ryby z      aquariums[0].removeFish(2)
+                    akwarium 0
+
+TRANS 0 1 3         przenosi 3 ryby z   aquariums[0].transferTo(aquariums[1], 3)
+                    0 do 1
+
+PRINT 0             wypisuje opis       System.out.println(aquariums[0].toString())
+                    akwarium 0
 
 
 
 
 
+Zadanie
+0.1 pkt
+Opis⌄
+
+Stwórz klasę Playlist, która modeluje playlistę muzyczną. Zadanie integruje wszystkie koncepty wykładu.
+
+Klasa powinna posiadać:
+
+    MAX_TRACKS — public static final int = 10
+    totalCreated — private static int, startuje od 0, rośnie przy każdym new
+    title (private final String) — tytuł playlisty
+    owner (private final String) — właściciel
+    trackCount (private int) — liczba dodanych utworów, startuje od 0
+    totalDurationSeconds (private int) — łączny czas trwania, startuje od 0
+
+Trzy konstruktory powiązane przez this(...):
+
+    Playlist(String title, String owner) — konstruktor główny; waliduje: title i owner nie mogą być null/puste (komunikaty: Title required i Owner required); inkrementuje totalCreated
+    Playlist(String title) — deleguje przez this(title, "Anonymous")
+    Playlist() — deleguje przez this("Untitled")
+
+Metody:
+
+    addTrack(int durationSeconds) — dodaje utwór o podanym czasie; rzuca IllegalArgumentException("Duration must be positive") gdy <= 0; rzuca IllegalStateException("Playlist is full") gdy trackCount == MAX_TRACKS
+    removeLastTrack(int durationSeconds) — usuwa ostatni utwór o podanym czasie trwania; rzuca IllegalStateException("Playlist is empty") gdy trackCount == 0
+    mergeFrom(Playlist other) — próbuje dodać wszystkie utwory z other do tej playlisty (jako łączny czas podzielony równo); uproszczenie: dodaje other.trackCount razy średni czas (other.totalDurationSeconds / other.trackCount), zatrzymuje się gdy lista pełna; jeśli other jest pusta, nie robi nic
+    getAverageDuration() — zwraca średni czas trwania jako double; zwraca 0.0 jeśli trackCount == 0
+    Statyczna metoda: getTotalCreated()
+    Gettery: getTitle(), getOwner(), getTrackCount(), getTotalDurationSeconds()
+    toString(): Playlist[title=[title], owner=[owner], tracks=[trackCount]/10, duration=[totalDurationSeconds]s]
+
+Format wejścia: komendy:
+
+    NEW2 [title] [owner] — konstruktor 2-arg (zapisuje do kolejnego slotu: 0, potem 1)
+    NEW1 [title] — konstruktor 1-arg
+    NEW0 — konstruktor 0-arg
+    ADD [id] [durationSeconds] — jeśli wyjątek, wypisz message
+    REM [id] [durationSeconds] — jeśli wyjątek, wypisz message
+    MERGE [fromId] [toId] — mergeFrom
+    AVG [id] — wypisz getAverageDuration()
+    TOTAL — wypisz getTotalCreated()
+    PRINT [id] — wypisz toString()
+
+Komenda             Co robi                 Wywołanie Java
 
 
-tworzy obiekt Prescription
+NEW2 MyMix Alice    tworzy playlistę        pl[0] = new Playlist("MyMix", "Alice")
+                    (2 argumenty)
 
+NEW1 Chill          tworzy playlistę        pl[0] = new Playlist("Chill")
+                    (1 argument)
 
-p = new Prescription("Ibuprofen", 200.0, 3)
+NEW0                tworzy playlistę        pl[0] = new Playlist()
+                    (0 argumentów)
 
-USE
+ADD 0 180           dodaje utwór do         pl[0].addTrack(180)
+                    playlisty 0
 
+REM 0 180           usuwa ostatni utwór     pl[0].removeLastTrack(180)
+                    z playlisty 0
 
-zużywa jedno uzupełnienie
+MERGE 0 1           scala playlistę 0       pl[1].mergeFrom(pl[0])
+                    do 1
 
+AVG 0               wypisuje średni         System.out.println(pl[0].getAverageDuration())
+                    czas utworu
 
-p.useRefill()
+TOTAL               wypisuje liczbę         System.out.println(Playlist.getTotalCreated())
+                    utworzonych playlist
 
-PRINT
-
-
-wypisuje opis recepty
-
-
-System.out.println(p.toString())
-
-INIT_ERR Lek -5.0 1
-
-
-próba tworzenia (oczekiwany wyjątek)
-
-
-new Prescription("Lek", -5.0, 1) // rzuca wyjątek
+PRINT 0             wypisuje opis           System.out.println(pl[0].toString())
+                    playlisty 0

@@ -1,0 +1,376 @@
+Zadanie 0.1 pkt
+
+
+Stwórz klasę Temperature (oznaczoną jako final), która reprezentuje temperaturę. Klasa jest niemodyfikowalna — nie ma setterów, operacje zwracają nowe obiekty.
+
+Klasa powinna posiadać:
+
+    Prywatne final pole double celsius
+    Prywatny konstruktor (nie można tworzyć obiektu przez new Temperature(...) z zewnątrz)
+    Prywatną metodę pomocniczą create(double celsius) — rzuca IllegalArgumentException("Temperature below absolute zero") gdy celsius < -273.15
+
+Statyczne fabryki (każda waliduje temperaturę):
+
+    static Temperature ofCelsius(double celsius)
+    static Temperature ofKelvin(double kelvin) — rzuca gdy kelvin < 0; przelicza: celsius = kelvin - 273.15
+    static Temperature ofFahrenheit(double fahrenheit) — przelicza: celsius = (fahrenheit - 32) * 5 / 9
+
+Konwersje (obliczane na bieżąco):
+
+    toCelsius() → zwraca przechowane pole celsius
+    toKelvin() → celsius + 273.15
+    toFahrenheit() → celsius * 9.0 / 5.0 + 32.0
+
+Metody porównawcze:
+
+    isColder(Temperature other) → this.celsius < other.celsius
+    isWarmer(Temperature other) → this.celsius > other.celsius
+    isSameTemperature(Temperature other) → Double.compare(this.celsius, other.celsius) == 0
+
+Metoda average(Temperature other) → zwraca NOWY obiekt z uśrednioną temperaturą: new Temperature((this.celsius + other.celsius) / 2.0) (użyj prywatnego konstruktora bezpośrednio).
+
+toString() → Temperature[celsius=<celsius>]
+
+Format wejścia — komendy:
+
+    CELSIUS <value> — t = Temperature.ofCelsius(value)
+    KELVIN <value> — t = Temperature.ofKelvin(value)
+    FAHRENHEIT <value> — t = Temperature.ofFahrenheit(value)
+    TO_C — wypisz toCelsius()
+    TO_K — wypisz toKelvin()
+    TO_F — wypisz toFahrenheit()
+    PRINT — wypisz toString()
+    COLDER <celsius> — wypisz t.isColder(Temperature.ofCelsius(celsius))
+    WARMER <celsius> — wypisz t.isWarmer(Temperature.ofCelsius(celsius))
+    AVERAGE <celsius> — t = t.average(Temperature.ofCelsius(celsius)); wypisz t.toString()
+    ERR_C <value> — próba ofCelsius; jeśli wyjątek, wypisz message
+    ERR_K <value> — próba ofKelvin; jeśli wyjątek, wypisz message
+
+
+
+
+Zadanie 0.1 pkt
+
+
+ Stwórz klasę BankAccount, która modeluje konto bankowe z rygorystyczną hermetyzacją stanu.
+
+ Klasa powinna posiadać:
+
+     Stałe klasowe: static final double MAX_SINGLE_DEPOSIT = 100000.0 i MAX_SINGLE_WITHDRAWAL = 50000.0
+     Prywatne pola: final String iban (niezmienne po utworzeniu), String ownerName, double balance
+
+ Konstruktor BankAccount(String iban, String ownerName, double initialBalance):
+
+     IllegalArgumentException("Invalid IBAN") gdy iban null lub pusty
+     IllegalArgumentException("Invalid owner name") gdy ownerName null lub pusty
+     IllegalArgumentException("Balance cannot be negative") gdy initialBalance < 0
+
+ Metoda deposit(double amount):
+
+     IllegalArgumentException("Amount must be positive") gdy amount <= 0
+     IllegalArgumentException("Exceeds single deposit limit") gdy amount > MAX_SINGLE_DEPOSIT
+
+ Metoda withdraw(double amount):
+
+     IllegalArgumentException("Amount must be positive") gdy amount <= 0
+     IllegalArgumentException("Exceeds single withdrawal limit") gdy amount > MAX_SINGLE_WITHDRAWAL
+     IllegalArgumentException("Insufficient funds") gdy amount > balance
+
+ Metoda transfer(BankAccount target, double amount) — wywołuje this.withdraw(amount), a następnie target.deposit(amount). Jeśli withdraw rzuci wyjątek, deposit nie jest wykonywany.
+
+ Metoda setOwnerName(String ownerName) — rzuca IllegalArgumentException("Invalid owner name") gdy null lub pusty.
+
+ Gettery: getIban(), getOwnerName(), getBalance(). Brak setBalance() — saldo zmienia się wyłącznie przez deposit/withdraw/transfer.
+
+ toString() → BankAccount[iban=<iban>, owner=<ownerName>, balance=<balance>]
+
+ Format wejścia — komendy (konta identyfikowane literą A, B, ...):
+
+     INIT <id> <iban> <name> <balance> — tworzy konto
+     DEPOSIT <id> <amount> — wpłata (jeśli wyjątek, wypisz message)
+     WITHDRAW <id> <amount> — wypłata (jeśli wyjątek, wypisz message)
+     TRANSFER <fromId> <toId> <amount> — przelew (jeśli wyjątek, wypisz message)
+     RENAME <id> <name> — zmienia właściciela (jeśli wyjątek, wypisz message)
+     PRINT <id> — wypisz toString()
+     INIT_ERR <iban> <name> <balance> — próba stworzenia; jeśli wyjątek, wypisz message
+
+
+
+Zadanie 0.1 pkt
+
+
+Stwórz klasę BankAccount, która modeluje konto bankowe z rygorystyczną hermetyzacją stanu.
+
+Klasa powinna posiadać:
+
+    Stałe klasowe: static final double MAX_SINGLE_DEPOSIT = 100000.0 i MAX_SINGLE_WITHDRAWAL = 50000.0
+    Prywatne pola: final String iban (niezmienne po utworzeniu), String ownerName, double balance
+
+Konstruktor BankAccount(String iban, String ownerName, double initialBalance):
+
+    IllegalArgumentException("Invalid IBAN") gdy iban null lub pusty
+    IllegalArgumentException("Invalid owner name") gdy ownerName null lub pusty
+    IllegalArgumentException("Balance cannot be negative") gdy initialBalance < 0
+
+Metoda deposit(double amount):
+
+    IllegalArgumentException("Amount must be positive") gdy amount <= 0
+    IllegalArgumentException("Exceeds single deposit limit") gdy amount > MAX_SINGLE_DEPOSIT
+
+Metoda withdraw(double amount):
+
+    IllegalArgumentException("Amount must be positive") gdy amount <= 0
+    IllegalArgumentException("Exceeds single withdrawal limit") gdy amount > MAX_SINGLE_WITHDRAWAL
+    IllegalArgumentException("Insufficient funds") gdy amount > balance
+
+Metoda transfer(BankAccount target, double amount) — wywołuje this.withdraw(amount), a następnie target.deposit(amount). Jeśli withdraw rzuci wyjątek, deposit nie jest wykonywany.
+
+Metoda setOwnerName(String ownerName) — rzuca IllegalArgumentException("Invalid owner name") gdy null lub pusty.
+
+Gettery: getIban(), getOwnerName(), getBalance(). Brak setBalance() — saldo zmienia się wyłącznie przez deposit/withdraw/transfer.
+
+toString() → BankAccount[iban=<iban>, owner=<ownerName>, balance=<balance>]
+
+Format wejścia — komendy (konta identyfikowane literą A, B, ...):
+
+    INIT <id> <iban> <name> <balance> — tworzy konto
+    DEPOSIT <id> <amount> — wpłata (jeśli wyjątek, wypisz message)
+    WITHDRAW <id> <amount> — wypłata (jeśli wyjątek, wypisz message)
+    TRANSFER <fromId> <toId> <amount> — przelew (jeśli wyjątek, wypisz message)
+    RENAME <id> <name> — zmienia właściciela (jeśli wyjątek, wypisz message)
+    PRINT <id> — wypisz toString()
+    INIT_ERR <iban> <name> <balance> — próba stworzenia; jeśli wyjątek, wypisz message
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Stwórz klasę Password, która bezpiecznie przechowuje hasło — oryginalne hasło nigdy nie jest przechowywane jako tekst.
+
+Klasa powinna posiadać prywatne pola:
+
+    int hash — suma wartości char ze String
+    int length — długość oryginalnego hasła
+    boolean hasDigit — czy zawierało cyfrę
+    boolean hasUppercase — czy zawierało wielką literę
+
+Konstruktor Password(String plainText) — rzuca IllegalArgumentException("Password cannot be empty") gdy null lub pusty po trim(). Wywołuje prywatną metodę store(plainText) do obliczenia i zapisania pól.
+
+Metody:
+
+    Prywatna store(String text) — oblicza hash (suma char), length, hasDigit, hasUppercase
+    Prywatna statyczna computeHash(String text) — zwraca sumę wartości char
+    matches(String attempt) → computeHash(attempt) == this.hash
+    isStrong() → length >= 8 && hasDigit && hasUppercase
+    getStrength() → "WEAK" gdy length < 6; "STRONG" gdy isStrong(); "FAIR" w przeciwnym wypadku
+    changePassword(String oldPassword, String newPassword) — rzuca IllegalArgumentException("Current password is incorrect") gdy !matches(oldPassword); rzuca IllegalArgumentException("New password cannot be empty") gdy newPassword null/pusty; wywołuje store(newPassword)
+    toString() → Password[hash=<hash>, strong=<isStrong()>]
+
+Format wejścia — komendy:
+
+    CREATE <token> — tworzy Password (jeden token bez spacji)
+    MATCHES <token> — wypisuje true/false
+    STRONG — wypisuje isStrong()
+    STRENGTH — wypisuje getStrength()
+    CHANGE <oldToken> <newToken> — changePassword (jeśli wyjątek, wypisz message)
+    PRINT — wypisuje toString()
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Stwórz klasę ImmutableMoney (oznaczoną jako final), która reprezentuje kwotę pieniędzy. Klasa jest niezmienna — żadna operacja nie modyfikuje istniejącego obiektu.
+
+Klasa powinna posiadać prywatne final pola: long amountInCents, String currency oraz:
+
+    Prywatny konstruktor
+    Statyczna fabryka ImmutableMoney of(long amountInCents, String currency) — rzuca IllegalArgumentException("Amount cannot be negative") gdy < 0; rzuca IllegalArgumentException("Currency cannot be empty") gdy null/pusty
+    add(ImmutableMoney other) — rzuca IllegalArgumentException("Currency mismatch") gdy różne waluty; zwraca NOWY obiekt
+    subtract(ImmutableMoney other) — rzuca IllegalArgumentException("Currency mismatch") gdy różne waluty; rzuca IllegalArgumentException("Result cannot be negative") gdy wynik < 0; zwraca NOWY obiekt
+    Gettery: getAmountInCents(), getCurrency()
+    toString() → ImmutableMoney[amount=<amountInCents>, currency=<currency>]
+
+Format wejścia — komendy:
+
+    CREATE <name> <amountInCents> <currency> — tworzy obiekt (name: A, B lub C)
+    ADD <nameA> <nameB> <resultName> — add() (jeśli wyjątek, wypisz message)
+    SUB <nameA> <nameB> <resultName> — subtract() (jeśli wyjątek, wypisz message)
+    PRINT <name> — wypisuje toString()
+    CREATE_ERR <amountInCents> <currency> — jeśli wyjątek, wypisz message
+
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Stwórz klasę ImmutableVector2D (oznaczoną jako final), która reprezentuje niezmienny wektor 2D.
+
+Klasa powinna posiadać prywatne final pola double x, double y oraz:
+
+    Konstruktor ImmutableVector2D(double x, double y)
+    add(ImmutableVector2D other) → nowy wektor (x+other.x, y+other.y)
+    scale(double factor) → nowy wektor (x*factor, y*factor)
+    negate() → nowy wektor (-x, -y)
+    length() → Math.round(Math.sqrt(x*x + y*y) * 100.0) / 100.0 (zaokrąglone do 2 miejsc)
+    Gettery: getX(), getY()
+    toString() → Vector2D[x=<x>, y=<y>]
+
+Format wejścia — komendy:
+
+    CREATE <name> <x> <y> — tworzy wektor (name: A, B, C)
+    ADD <nameA> <nameB> <result> — add()
+    SCALE <name> <factor> <result> — scale()
+    NEGATE <name> <result> — negate()
+    LENGTH <name> — wypisuje length()
+    PRINT <name> — wypisuje toString()
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Stwórz dwie klasy: Point i Circle, które demonstrują kompozycję obiektów i defensive copy.
+
+Klasa Point:
+
+    Prywatne final pola: double x, double y
+    Konstruktor Point(double x, double y)
+    Gettery: getX(), getY()
+    toString() → Point[x=<x>, y=<y>]
+
+Klasa Circle:
+
+    Prywatne final pole: Point center; prywatne pole: double radius
+    Konstruktor Circle(Point center, double radius) — rzuca IllegalArgumentException("Radius must be positive") gdy radius <= 0; przechowuje defensive copy: this.center = new Point(center.getX(), center.getY())
+    getCenter() → zwraca defensive copy
+    getRadius()
+    contains(Point p) → dystans od center do p <= radius
+    translate(double dx, double dy) → zwraca NOWY Circle z przesuniętym centrem
+    toString() → Circle[center=Point[x=<x>, y=<y>], radius=<radius>]
+
+Format wejścia — komendy:
+
+    CIRCLE <cx> <cy> <r> — tworzy Circle c
+    CONTAINS <px> <py> — wypisuje true/false
+    TRANSLATE <dx> <dy> — c = c.translate(dx, dy)
+    PRINT — wypisuje toString()
+    PRINT_CENTER — wypisuje c.getCenter().toString()
+    CIRCLE_ERR <cx> <cy> <r> — jeśli wyjątek, wypisz message
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Stwórz dwie klasy: Grade i Student, które modelują studenta z ocenami (kompozycja z kolekcją).
+
+Klasa Grade:
+
+    Prywatne final pola: String subject, double value
+    Konstruktor Grade(String subject, double value) — rzuca IllegalArgumentException("Invalid grade value") gdy value < 0 lub > 100; rzuca IllegalArgumentException("Subject cannot be empty") gdy null/pusty
+    Gettery: getSubject(), getValue()
+    toString() → Grade[subject=<subject>, value=<value>]
+
+Klasa Student:
+
+    Prywatne pola: String name, ArrayList<Grade> grades (inicjowana jako pusta)
+    Konstruktor Student(String name) — rzuca IllegalArgumentException("Name cannot be empty") gdy null/pusty
+    addGrade(Grade grade) — rzuca IllegalArgumentException("Grade cannot be null") gdy null
+    getAverage() → średnia wartości ocen; 0.0 jeśli brak ocen
+    getHighest() → Grade z najwyższą wartością lub null (wypisujemy "none")
+    getLowest() → Grade z najniższą wartością lub null (wypisujemy "none")
+    getGradeCount()
+    toString() → Student[name=<name>, grades=<count>]
+
+Format wejścia — komendy:
+
+    STUDENT <name> — tworzy studenta (name może zawierać spacje)
+    ADD_GRADE <subject> <value> — tworzy Grade i dodaje (jeśli wyjątek, wypisz message)
+    AVERAGE — wypisuje getAverage() w formacie %.2f
+    HIGHEST — wypisuje toString() najwyższej oceny lub "none"
+    LOWEST — wypisuje toString() najniższej oceny lub "none"
+    PRINT — wypisuje toString() studenta
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Stwórz dwie klasy: Player i Team, które modelują drużynę sportową z kapitanem i ograniczoną pojemnością.
+
+Klasa Player:
+
+    Prywatne final pola: String name, double salary
+    Konstruktor Player(String name, double salary) — rzuca IllegalArgumentException("Invalid player name") gdy null/pusty; rzuca IllegalArgumentException("Salary must be non-negative") gdy salary < 0
+    Gettery: getName(), getSalary()
+    toString() → Player[name=<name>, salary=<salary>]
+
+Klasa Team:
+
+    Prywatne pola: String teamName, int capacity, ArrayList<Player> players, Player captain (null = brak)
+    Konstruktor Team(String teamName, int capacity) — rzuca IllegalArgumentException("Capacity must be positive") gdy capacity <= 0
+    addPlayer(Player player) — rzuca IllegalStateException("Team is full") gdy players.size() >= capacity; rzuca IllegalArgumentException("Player cannot be null") gdy null
+    setCaptain(Player player) — rzuca IllegalArgumentException("Player is not in the team") gdy gracza nie ma na liście (sprawdź przez players.contains(player))
+    isFull() → boolean
+    totalPayroll() → suma salary wszystkich graczy
+    getPlayerCount()
+    getCaptain() → może być null
+    toString() → Team[name=<teamName>, players=<count>/<capacity>, captain=<captainName or "none">]
+
+Format wejścia — komendy:
+
+    TEAM <name> <capacity> — tworzy team
+    PLAYER <varName> <name> <salary> — tworzy gracza pod varName (A, B, C...)
+    ADD <varName> — dodaje gracza do teamu (jeśli wyjątek, wypisz message)
+    CAPTAIN <varName> — ustawia kapitana (jeśli wyjątek, wypisz message)
+    PAYROLL — wypisuje totalPayroll()
+    FULL — wypisuje true/false
+    PRINT — wypisuje toString() teamu
+    PRINT_PLAYER <varName> — wypisuje toString() gracza
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Stwórz dwie klasy: OrderItem i Order, które modelują zamówienie ze stanami cyklu życia.
+
+Klasa OrderItem:
+
+    Prywatne final pola: String productName, int quantity, double unitPrice
+    Konstruktor — rzuca IllegalArgumentException("Product name cannot be empty") gdy null/pusty; rzuca IllegalArgumentException("Quantity must be positive") gdy <= 0; rzuca IllegalArgumentException("Unit price must be positive") gdy <= 0
+    Gettery: getProductName(), getQuantity(), getUnitPrice()
+    subtotal() → quantity * unitPrice
+    toString() → OrderItem[product=<name>, qty=<qty>, price=<unitPrice>]
+
+Klasa Order:
+
+    Stałe statusy (private static final String): DRAFT = "DRAFT", CONFIRMED = "CONFIRMED", SHIPPED = "SHIPPED"
+    Prywatne pola: String orderId, ArrayList<OrderItem> items (max 5), String status (inicjalnie DRAFT)
+    Konstruktor Order(String orderId) — rzuca IllegalArgumentException("Order ID cannot be empty") gdy null/pusty
+    addItem(OrderItem item) — rzuca IllegalStateException("Order is full") gdy items.size() >= 5; rzuca IllegalStateException("Cannot modify confirmed order") gdy status != DRAFT
+    confirm() — rzuca IllegalStateException("Cannot confirm empty order") gdy items puste; zmienia status na CONFIRMED
+    ship() — rzuca IllegalStateException("Order must be confirmed first") gdy status != CONFIRMED; zmienia status na SHIPPED
+    calculateTotal() → suma subtotal() wszystkich items
+    getStatus(), getItemCount()
+    toString() → Order[id=<orderId>, items=<count>, status=<status>, total=<total formatted to 2dp>]
+
+Format wejścia — komendy:
+
+    ORDER <id> — tworzy Order
+    ADD_ITEM <product> <qty> <unitPrice> — tworzy OrderItem i dodaje (jeśli wyjątek, wypisz message)
+    CONFIRM — confirm() (jeśli wyjątek, wypisz message)
+    SHIP — ship() (jeśli wyjątek, wypisz message)
+    TOTAL — wypisuje calculateTotal() w formacie %.2f
+    STATUS — wypisuje getStatus()
+    PRINT — wypisuje toString()
