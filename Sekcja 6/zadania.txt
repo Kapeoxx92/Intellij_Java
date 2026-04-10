@@ -1,0 +1,70 @@
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę SafeStack, która reprezentuje stos liczb całkowitych.
+
+Wymagany model danych: obiekt ma przechowywać elementy w wewnętrznej tablicy typu referencyjnego, np. Integer[], oraz przechowywać informację o aktualnej liczbie elementów. Nie używaj gotowej klasy Stack ani ArrayList.
+
+To zadanie dotyczy również poprawnego zwalniania nieużywanych referencji. Po usunięciu elementu ze stosu slot tablicy, w którym ten element był przechowywany, powinien zostać wyczyszczony przez ustawienie wartości null. Dzięki temu usunięty obiekt nie pozostaje niepotrzebnie osiągalny.
+
+W klasie SafeStack zaimplementuj metody:
+
+void push(int x)
+int pop()
+int peek()
+int size()
+boolean isEmpty()
+
+Oczekiwane zachowanie:
+
+PUSH x   - dodaje liczbę x na wierzch stosu
+POP      - usuwa element z wierzchu i zwraca jego wartość
+PEEK     - zwraca element z wierzchu bez usuwania
+SIZE     - zwraca liczbę elementów przechowywanych na stosie
+ISEMPTY  - zwraca true, gdy stos jest pusty, w przeciwnym razie false
+
+Jeżeli operacja POP lub PEEK jest wykonywana na pustym stosie, program testujący wypisze "EmptyStackException". Nie musisz samodzielnie obsługiwać wypisywania komunikatu, ale Twoja klasa musi poprawnie rozpoznawać stan pustego stosu.
+
+Możesz założyć, że stos może wymagać powiększania tablicy wewnętrznej.
+
+Format wejścia:
+
+linia 1: N - liczba operacji
+kolejne N linii: jedna z operacji PUSH x, POP, PEEK, SIZE, ISEMPTY
+
+Format wyjścia: dla każdej operacji POP, PEEK, SIZE i ISEMPTY program wypisuje wynik w osobnej linii.
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę NullSafeList, która przechowuje liczby całkowite i udostępnia podstawowe operacje sekwencyjne.
+
+Wymagany model danych: klasa ma przechowywać elementy w własnej wewnętrznej tablicy typu prostego lub referencyjnego oraz przechowywać aktualny rozmiar. Nazwa zadania zawiera słowo "list", ale w tym zadaniu chodzi o własną strukturę listową opartą na tablicy, a nie o użycie gotowej klasy List lub ArrayList.
+
+W klasie NullSafeList zaimplementuj metody:
+
+void add(int value)
+int get(int index)
+boolean contains(int value)
+int size()
+String toString()
+
+Oczekiwane zachowanie operacji:
+
+ADD x       - dodaje wartość x na koniec listy
+GET i       - zwraca element o indeksie i (indeksowanie od 0)
+CONTAINS x  - zwraca true, jeśli wartość x znajduje się na liście
+SIZE        - zwraca aktualną liczbę elementów
+TOSTRING    - zwraca listę w formacie [a, b, c] albo [] dla listy pustej
+
+Na wejściu może pojawić się komenda ADD null. Słowo null należy traktować jako niepoprawną wartość wejściową. W takim przypadku kod testujący wypisze "IllegalArgumentException" i nie wywoła metody add. Podobnie dla niepoprawnego indeksu w operacji GET kod testujący wypisze "IndexOutOfBoundsException".
+
+To zadanie nie wymaga przechowywania wartości null wewnątrz klasy, ponieważ metoda add przyjmuje parametr typu int. Sens zadania polega na tym, że cały program ma odrzucić tekstowe wejście null, a sama struktura ma poprawnie działać dla liczb całkowitych.
+
+Format wejścia:
+
+linia 1: N - liczba operacji
+kolejne N linii: operacje ADD x, GET i, CONTAINS x, SIZE, TOSTRING
