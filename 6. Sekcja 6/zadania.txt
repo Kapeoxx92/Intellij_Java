@@ -1,0 +1,362 @@
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę SafeStack, która reprezentuje stos liczb całkowitych.
+
+Wymagany model danych: obiekt ma przechowywać elementy w wewnętrznej tablicy typu referencyjnego, np. Integer[], oraz przechowywać informację o aktualnej liczbie elementów. Nie używaj gotowej klasy Stack ani ArrayList.
+
+To zadanie dotyczy również poprawnego zwalniania nieużywanych referencji. Po usunięciu elementu ze stosu slot tablicy, w którym ten element był przechowywany, powinien zostać wyczyszczony przez ustawienie wartości null. Dzięki temu usunięty obiekt nie pozostaje niepotrzebnie osiągalny.
+
+W klasie SafeStack zaimplementuj metody:
+
+void push(int x)
+int pop()
+int peek()
+int size()
+boolean isEmpty()
+
+Oczekiwane zachowanie:
+
+PUSH x   - dodaje liczbę x na wierzch stosu
+POP      - usuwa element z wierzchu i zwraca jego wartość
+PEEK     - zwraca element z wierzchu bez usuwania
+SIZE     - zwraca liczbę elementów przechowywanych na stosie
+ISEMPTY  - zwraca true, gdy stos jest pusty, w przeciwnym razie false
+
+Jeżeli operacja POP lub PEEK jest wykonywana na pustym stosie, program testujący wypisze "EmptyStackException". Nie musisz samodzielnie obsługiwać wypisywania komunikatu, ale Twoja klasa musi poprawnie rozpoznawać stan pustego stosu.
+
+Możesz założyć, że stos może wymagać powiększania tablicy wewnętrznej.
+
+Format wejścia:
+
+linia 1: N - liczba operacji
+kolejne N linii: jedna z operacji PUSH x, POP, PEEK, SIZE, ISEMPTY
+
+Format wyjścia: dla każdej operacji POP, PEEK, SIZE i ISEMPTY program wypisuje wynik w osobnej linii.
+
+
+
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę NullSafeList, która przechowuje liczby całkowite i udostępnia podstawowe operacje sekwencyjne.
+
+Wymagany model danych: klasa ma przechowywać elementy w własnej wewnętrznej tablicy typu prostego lub referencyjnego oraz przechowywać aktualny rozmiar. Nazwa zadania zawiera słowo "list", ale w tym zadaniu chodzi o własną strukturę listową opartą na tablicy, a nie o użycie gotowej klasy List lub ArrayList.
+
+W klasie NullSafeList zaimplementuj metody:
+
+void add(int value)
+int get(int index)
+boolean contains(int value)
+int size()
+String toString()
+
+Oczekiwane zachowanie operacji:
+
+ADD x       - dodaje wartość x na koniec listy
+GET i       - zwraca element o indeksie i (indeksowanie od 0)
+CONTAINS x  - zwraca true, jeśli wartość x znajduje się na liście
+SIZE        - zwraca aktualną liczbę elementów
+TOSTRING    - zwraca listę w formacie [a, b, c] albo [] dla listy pustej
+
+Na wejściu może pojawić się komenda ADD null. Słowo null należy traktować jako niepoprawną wartość wejściową. W takim przypadku kod testujący wypisze "IllegalArgumentException" i nie wywoła metody add. Podobnie dla niepoprawnego indeksu w operacji GET kod testujący wypisze "IndexOutOfBoundsException".
+
+To zadanie nie wymaga przechowywania wartości null wewnątrz klasy, ponieważ metoda add przyjmuje parametr typu int. Sens zadania polega na tym, że cały program ma odrzucić tekstowe wejście null, a sama struktura ma poprawnie działać dla liczb całkowitych.
+
+Format wejścia:
+
+linia 1: N - liczba operacji
+kolejne N linii: operacje ADD x, GET i, CONTAINS x, SIZE, TOSTRING
+
+
+
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę LogFile, która symuluje zasób możliwy do zamknięcia.
+
+Wymagany model danych: nie tworzysz prawdziwego pliku na dysku i nie zapisujesz treści wiadomości. Obiekt ma przechowywać tylko stan otwarty/zamknięty oraz liczbę poprawnie zapisanych linii. Sama treść komunikatów przekazywanych do write nie musi być nigdzie zapamiętywana.
+
+W klasie LogFile zaimplementuj metody:
+
+void write(String message)
+boolean close()
+boolean isOpen()
+int getLinesWritten()
+
+Wymagania:
+
+WRITE msg - symuluje zapis jednej linii i zwiększa licznik zapisanych linii
+CLOSE     - zamyka zasób
+STATUS    - sprawdza, czy zasób jest otwarty
+
+Po utworzeniu obiektu log jest otwarty. Metoda close() ma być idempotentna:
+
+przy pierwszym zamknięciu zwraca true
+przy kolejnym i każdym następnym wywołaniu zwraca false
+
+Kod testujący korzysta z tego zwrotu, aby zdecydować, czy wypisać komunikat o zamknięciu. Jeśli log jest już zamknięty, operacja WRITE nie powinna nic zapisywać; testy rozpoznają taki stan przez metodę isOpen() i wypisują "IllegalStateException".
+
+Format wejścia:
+
+linia 1: N - liczba operacji
+kolejne N linii: WRITE msg, CLOSE lub STATUS
+
+Format wyjścia: operacja STATUS wypisuje open albo closed, pierwsze skuteczne CLOSE wypisuje liczbę zapisanych linii, a próba zapisu po zamknięciu kończy się komunikatem "IllegalStateException".
+
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę TimedBlock, która symuluje zagnieżdżone bloki mierzące czas wykonania.
+
+Wymagany model danych: obiekt ma przechowywać wyłącznie nazwy aktualnie otwartych bloków w strukturze działającej jak stos. Nie mierzysz prawdziwego czasu i nie zapisujesz żadnych wartości czasowych wewnątrz klasy.
+
+W klasie TimedBlock zaimplementuj metody:
+
+void start(String name)
+String stop()
+
+Zasady działania:
+
+START nazwa - rozpoczyna nowy aktywny blok o podanej nazwie
+STOP czas   - kończy ostatnio rozpoczęty, jeszcze niezakończony blok
+
+Wartość czasu podana przy STOP jest używana wyłącznie przez kod testujący do wypisania komunikatu. Twoja klasa ma jedynie pamiętać nazwy aktywnych bloków i zwracać nazwę bloku zamykanego przez stop().
+
+Bloki działają jak stos, czyli w kolejności LIFO. Jeżeli najpierw otwarto outer, potem inner, to pierwszy STOP zamyka inner, a dopiero kolejny STOP zamyka outer.
+
+Możesz założyć, że dane wejściowe są poprawne: liczba komend START i STOP jest zgodna, a STOP nie pojawi się bez wcześniej rozpoczętego bloku.
+
+Format wejścia:
+
+linia 1: N - liczba operacji
+kolejne N linii: START nazwa albo STOP czas_ms
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę ObjectPool, która symuluje prostą pulę obiektów. Każdy obiekt jest reprezentowany wyłącznie przez liczbę całkowitą będącą jego identyfikatorem.
+
+Wymagany model danych: obiekt ma przechowywać stos dostępnych identyfikatorów oraz licznik następnego nowego identyfikatora. Nie tworzysz prawdziwych obiektów, tylko operujesz na numerach.
+
+W klasie ObjectPool zaimplementuj metody:
+
+int acquire()
+void release(int id)
+int poolSize()
+
+Zasady działania:
+
+ACQUIRE    - jeżeli w puli są dostępne identyfikatory, zwraca jeden z nich
+ACQUIRE    - jeżeli pula jest pusta, tworzy nowy identyfikator
+RELEASE id - odkłada identyfikator z powrotem do puli
+POOLSIZE   - zwraca liczbę identyfikatorów aktualnie czekających w puli
+
+Nowe identyfikatory należy nadawać kolejno: 1, 2, 3, 4, ...
+
+Jeżeli w puli są już jakieś zwrócone identyfikatory, kolejne ACQUIRE ma pobierać ostatnio zwrócony identyfikator, czyli pula działa w tym miejscu jak stos (LIFO).
+
+W tym zadaniu nie trzeba sprawdzać, czy zwracany identyfikator wcześniej rzeczywiście został pobrany. Jeśli na wejściu pojawi się RELEASE 99, ten identyfikator po prostu trafia do puli i może zostać później zwrócony przez acquire().
+
+Format wejścia:
+
+linia 1: N - liczba operacji
+kolejne N linii: ACQUIRE, RELEASE id lub POOLSIZE
+
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę FifoCache, która przechowuje pary klucz-wartość i ma ograniczoną pojemność. Gdy cache jest pełny i trzeba dodać nowy klucz, należy usunąć wpis dodany najwcześniej.
+
+Wymagany model danych: klasa ma przechowywać zbiór wpisów oraz ich kolejność dodania. Możesz zrealizować to np. na własnych tablicach. Nie używaj gotowych klas cache ani struktur automatycznie realizujących politykę FIFO.
+
+W klasie FifoCache zaimplementuj:
+
+konstruktor FifoCache(int capacity)
+void put(String key, String value)
+String get(String key)
+boolean contains(String key)
+int size()
+
+Zasady działania:
+
+PUT k v    - dodaje nowy wpis albo aktualizuje istniejący
+GET k      - zwraca wartość przypisaną do klucza albo null, jeśli klucz nie istnieje
+CONTAINS k - zwraca true, jeśli klucz istnieje w cache
+SIZE       - zwraca aktualną liczbę wpisów
+
+Jeżeli put dostaje klucz, który już istnieje, należy tylko podmienić wartość. Taki wpis zachowuje swoją dotychczasową pozycję w kolejności FIFO, czyli nie staje się "najnowszy".
+
+Jeżeli dodawany jest nowy klucz i cache osiągnął maksymalną pojemność, trzeba usunąć najstarszy wpis, a następnie dodać nowy.
+
+Format wejścia:
+
+linia 1: capacity - maksymalna liczba wpisów
+linia 2: N - liczba operacji
+kolejne N linii: PUT k v, GET k, CONTAINS k, SIZE
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę DatabaseSimulator, która symuluje połączenie z bazą danych. Obiekt może być połączony albo rozłączony, a dodatkowo klasa ma przechowywać statyczny licznik wszystkich aktualnie otwartych połączeń.
+
+Wymagany model danych: pojedynczy obiekt ma przechowywać tylko stan połączenia (otwarte lub zamknięte). Klasa jako całość ma dodatkowo przechowywać statyczne pole licznika otwartych połączeń. Nie tworzysz prawdziwego połączenia z bazą i nie wykonujesz realnych zapytań SQL.
+
+W klasie DatabaseSimulator zaimplementuj metody:
+
+void connect(String name)
+String query(String sql)
+boolean close()
+static int getOpenCount()
+
+Wymagania:
+
+CONNECT name - otwiera połączenie i zwiększa licznik otwartych połączeń
+QUERY sql    - zwraca przekazane zapytanie, jeśli połączenie jest aktywne
+CLOSE        - zamyka połączenie i zmniejsza licznik tylko przy pierwszym zamknięciu
+OPENCOUNT    - zwraca aktualną wartość licznika statycznego
+
+Program testujący pracuje na jednym obiekcie, więc licznik w praktyce przyjmie wartości 0 albo 1, ale ma być przechowywany jako pole statyczne klasy.
+
+Jeżeli połączenie jest zamknięte, metoda query powinna zwrócić null. Na tej podstawie kod testujący wypisze komunikat "ERROR: connection closed".
+
+Metoda close() ma być idempotentna:
+
+pierwsze skuteczne zamknięcie zwraca true
+kolejne wywołania zwracają false i nie zmieniają licznika
+
+Możesz założyć, że kolejne CONNECT w testach pojawi się dopiero po zamknięciu poprzedniego połączenia.
+
+Format wejścia:
+
+linia 1: N - liczba operacji
+kolejne N linii: CONNECT name, QUERY sql, CLOSE lub OPENCOUNT
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę EventBus, która przechowuje subskrypcje listenerów dla różnych zdarzeń. Zadanie polega na poprawnym dodawaniu subskrypcji, usuwaniu ich oraz zwracaniu listy listenerów, którzy mają zostać powiadomieni.
+
+Wymagany model danych: obiekt ma przechowywać pary (event, listener) w kolejności rejestracji. Możesz zrealizować to np. jako dwie równoległe tablice albo inną własną strukturę. Nie modelujesz prawdziwych obiektów listenerów ani wywołań metod zwrotnych, tylko same nazwy.
+
+W klasie EventBus zaimplementuj metody:
+
+void subscribe(String event, String listener)
+void unsubscribe(String event, String listener)
+String[] publish(String event)
+
+Zasady działania:
+
+SUBSCRIBE event listener   - dodaje listener do wskazanego zdarzenia
+UNSUBSCRIBE event listener - usuwa jedno wystąpienie takiej subskrypcji
+PUBLISH event             - zwraca listenerów przypisanych do zdarzenia
+
+Ważne szczegóły:
+
+kolejność listenerów zwracanych przez publish() musi być taka sama jak kolejność subskrypcji
+jeżeli ten sam listener został zapisany kilka razy, każde zapisanie traktuj jako osobną subskrypcję
+unsubscribe() usuwa tylko jedno pierwsze pasujące wystąpienie
+jeżeli nie ma pasującej subskrypcji, unsubscribe() nic nie robi
+jeżeli zdarzenie nie ma listenerów, publish() zwraca pustą tablicę
+
+Kod testujący sam wypisuje wynik operacji PUBLISH w postaci [event] -> listener, więc Twoja metoda publish ma jedynie zwrócić odpowiednią tablicę nazw listenerów.
+
+Format wejścia:
+
+linia 1: N - liczba operacji
+kolejne N linii: SUBSCRIBE event listener, UNSUBSCRIBE event listener lub PUBLISH event
+
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę CircularBuffer, która reprezentuje bufor cykliczny o stałej pojemności. Po zapełnieniu bufora każdy nowy element nadpisuje element najstarszy.
+
+Wymagany model danych: klasa ma przechowywać elementy w tablicy o stałej długości, a dodatkowo utrzymywać informację o początku logicznej kolejki, miejscu następnego zapisu i aktualnym rozmiarze. Nie zwiększasz pojemności bufora po utworzeniu obiektu.
+
+W klasie CircularBuffer zaimplementuj:
+
+konstruktor CircularBuffer(int capacity)
+void add(String value)
+String get(int index)
+int size()
+boolean isFull()
+String toString()
+
+Zasady działania:
+
+ADD x    - dodaje element do bufora
+GET i    - zwraca element o indeksie i liczonym od najstarszego elementu
+SIZE     - zwraca aktualną liczbę elementów w buforze
+ISFULL   - zwraca true, jeśli bufor jest pełny
+TOSTRING - zwraca zawartość od najstarszego do najnowszego w formacie [a, b, c]
+
+Indeksowanie w get zaczyna się od najstarszego elementu:
+
+get(0) zwraca element najstarszy
+get(size() - 1) zwraca element najnowszy
+
+Jeżeli bufor jest pełny, operacja add nie zwiększa już rozmiaru, tylko nadpisuje najstarszy element. Po takim nadpisaniu zmienia się również to, co uznajemy za element najstarszy.
+
+Jeżeli indeks w GET jest spoza zakresu, kod testujący wypisze "IndexOutOfBoundsException".
+
+Format wejścia:
+
+linia 1: capacity - pojemność bufora
+linia 2: N - liczba operacji
+kolejne N linii: ADD x, GET i, SIZE, ISFULL lub TOSTRING
+
+
+
+
+Zadanie 0.1 pkt
+
+
+Zaimplementuj klasę ResourceManager, która rejestruje wiele zasobów i potrafi zamknąć je wszystkie naraz. Zasoby są reprezentowane tylko przez swoje nazwy.
+
+Wymagany model danych: obiekt ma przechowywać kolekcję nazw zarejestrowanych zasobów w kolejności rejestracji. Nie tworzysz prawdziwych obiektów implementujących AutoCloseable i nie wywołujesz ich metod close(); zadanie polega wyłącznie na zarządzaniu nazwami i kolejnością zamykania.
+
+W klasie ResourceManager zaimplementuj metody:
+
+void register(String name)
+String[] closeAll()
+int status()
+
+Zasady działania:
+
+REGISTER name - dodaje zasób do menedżera
+CLOSEALL      - zwraca nazwy wszystkich zasobów do zamknięcia
+STATUS        - zwraca liczbę aktualnie zarejestrowanych zasobów
+
+Metoda closeAll() ma zwracać zasoby w odwrotnej kolejności rejestracji, czyli zgodnie z zasadą LIFO. Jeżeli zarejestrowano kolejno a, b, c, to closeAll() powinno zwrócić tablicę: c, b, a.
+
+Po wykonaniu closeAll() menedżer ma zostać opróżniony. Oznacza to, że kolejne wywołanie status() powinno zwrócić 0, a następne register() zaczyna budować nową listę zasobów.
+
+Kod testujący samodzielnie wypisuje komunikaty Closing: ..., ERROR: ... oraz Done.. Twoja klasa ma jedynie poprawnie przechowywać kolejność i wyczyścić stan po zamknięciu wszystkiego.
+
+Jeżeli nie ma żadnych zasobów, closeAll() powinno zwrócić pustą tablicę.
+
+Format wejścia:
+
+linia 1: N - liczba operacji
+kolejne N linii: REGISTER name, CLOSEALL lub STATUS
